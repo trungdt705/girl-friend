@@ -4,18 +4,11 @@ import { client } from '../config/redis';
 
 exports.load = async (req, res, next, id) => {
     try {
-        let favourite = await client.getAsync(`favourite:${id}`);
-        if (!favourite) {
-            favourite = await Favourite.get(id);
-            client.setAsync(`favourite:${id}`, JSON.stringify(favourite));
-        }
+        let favourite = await Favourite.get(id);
         req.locals = req.locals ? req.locals : {};
-        const parseFavourite = JSON.parse(favourite);
-        req.locals.favourite = parseFavourite;
+        req.locals.favourite = favourite;
         next();
     } catch (error) {
-        console.log(error);
-
         errorHandler(error, req, res, next);
     }
 };

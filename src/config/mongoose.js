@@ -5,7 +5,7 @@ import { mongo } from './var';
 mongoose.Promise = Bluebird;
 
 const connect = () => {
-    mongoose.connect(mongo.uri_dev, {
+    mongoose.connect(mongo.uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         keepAlive: 1

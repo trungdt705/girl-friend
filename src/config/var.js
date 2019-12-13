@@ -3,8 +3,12 @@ require('dotenv-safe').config();
 
 module.exports = {
     mongo: {
-        uri_dev: process.env.MONGO_URI
+        uri:
+            process.env.NODE_ENV === 'test'
+                ? process.env.MONGO_URI_TEST
+                : process.env.MONGO_URI
     },
+
     redis: {
         uri: process.env.REDIS_URI
     },
